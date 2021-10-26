@@ -8,6 +8,7 @@ spring:
     url: jdbc:mysql://localhost:3306/takeaway?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
   redis:
     host: 172.20.2.28
     port: 6379
@@ -18,5 +19,17 @@ spring:
     nacos:
       discovery:
         server-addr: 172.20.2.28:8848
+    gateway:
+      routes:
+        - id: takeaway-user
+          uri: lb://takeaway-user
+          predicates:
+            # - Path=/oms/app/**,/xchange/services/**
+            - Path=/takeaway/user/**
+          filters:
+            - name: Hystrix
+              args:
+                name: defaultfallback
+                fallbackUri: forward:/defaultfallback
 logging:
   config: classpath:logback.xml
