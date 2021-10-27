@@ -1,7 +1,6 @@
-package service;
+package com.example.bootgateway.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import .entity.Shopcar;
 
 /**
  * (Shopcar)表服务接口

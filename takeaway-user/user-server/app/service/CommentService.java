@@ -1,7 +1,6 @@
-package service;
+package com.example.bootgateway.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import .entity.Comment;
 
 /**
  * (Comment)表服务接口

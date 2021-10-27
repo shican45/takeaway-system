@@ -14,12 +14,32 @@ spring:
     port: 6379
     password: 54#98%ag
   application:
-    name: takeaway
+    name: takeaway-gateway
   cloud:
     nacos:
       discovery:
         server-addr: 172.20.2.28:8848
     gateway:
+      default-filters:
+        - AuthorizationFilter
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      globalcors:
+        corsConfigurations:
+          '[/auth/**]':
+            allowedOrigins: '*'
+            allowedHeaders:
+              - x-auth-token
+              - x-request-id
+              - Content-Type
+              - x-requested-with
+              - x-request-id
+            allowedMethods:
+              - GET
+              - POST
+              - OPTIONS
       routes:
         - id: takeaway-user
           uri: lb://takeaway-user
@@ -32,4 +52,12 @@ spring:
                 name: defaultfallback
                 fallbackUri: forward:/defaultfallback
 logging:
-  config: classpath:logback.xml
+  level:
+    org.springframework.cloud.gateway: debug
+  # config: classpath:logback.xml
+
+ignore:
+  authorization:
+    urlList:
+      - /permission/login
+      - /permission/logout

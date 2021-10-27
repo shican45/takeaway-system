@@ -1,9 +1,6 @@
-package service.impl;
+package com.example.bootgateway.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import .dao.BalanceChangeDao;
-import .entity.BalanceChange;
-import .service.BalanceChangeService;
 import org.springframework.stereotype.Service;
 
 /**

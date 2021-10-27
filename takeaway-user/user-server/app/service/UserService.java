@@ -7,7 +7,7 @@ import .entity.User;
  * (User)表服务接口
  *
  * @author makejava
- * @since 2021-10-26 09:57:18
+ * @since 2021-10-27 17:19:11
  */
 public interface UserService extends IService<User> {
 

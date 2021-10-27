@@ -12,7 +12,7 @@ import java.io.Serializable;
  * (User)表实体类
  *
  * @author makejava
- * @since 2021-10-26 09:57:17
+ * @since 2021-10-27 17:19:11
  */
 @SuppressWarnings("serial")
 public class User extends Model<User> {

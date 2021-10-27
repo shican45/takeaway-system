@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import .entity.Rider;
-import .service.RiderService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,7 +15,7 @@ import java.util.List;
  * (Rider)表控制层
  *
  * @author makejava
- * @since 2021-10-26 09:57:19
+ * @since 2021-10-27 17:19:12
  */
 @RestController
 @RequestMapping("rider")

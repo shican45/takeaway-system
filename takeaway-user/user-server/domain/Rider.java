@@ -12,7 +12,7 @@ import java.io.Serializable;
  * (Rider)表实体类
  *
  * @author makejava
- * @since 2021-10-26 09:57:19
+ * @since 2021-10-27 17:19:12
  */
 @SuppressWarnings("serial")
 public class Rider extends Model<Rider> {

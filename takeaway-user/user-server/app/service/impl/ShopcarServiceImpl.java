@@ -1,9 +1,6 @@
-package service.impl;
+package com.example.bootgateway.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import .dao.ShopcarDao;
-import .entity.Shopcar;
-import .service.ShopcarService;
 import org.springframework.stereotype.Service;
 
 /**
