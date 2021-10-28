@@ -2,6 +2,7 @@ package com.example.bootgateway.filter;
 
 import com.example.bootgateway.config.IgnoreAuthorizationConfig;
 import com.example.bootgateway.service.AuthorizationClient1;
+import com.example.bootgateway.service.AuthorizationClient2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -23,7 +24,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class AuthorizationFilter extends AbstractGatewayFilterFactory<AuthorizationFilter.Config> {
     @Autowired
-    private AuthorizationClient1 authorizationClient;
+    private AuthorizationClient2 authorizationClient;
 
     @Autowired
     private IgnoreAuthorizationConfig ignoreAuthorizationConfig;

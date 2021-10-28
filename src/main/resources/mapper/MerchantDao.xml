@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.MerchantDao">
+
+    <resultMap type=".entity.Merchant" id="MerchantMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="balance" column="balance" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="businessStatus" column="business_status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastModifyTime" column="last_modify_time" jdbcType="TIMESTAMP"/>
+        <result property="isBanned" column="is_banned" jdbcType="BYTE"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into takeaway.merchant(name, account, password, phone, address, balance, description, business_status,
+        create_time, last_modify_time, is_banned)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.account}, #{entity.password}, #{entity.phone}, #{entity.address},
+            #{entity.balance}, #{entity.description}, #{entity.businessStatus}, #{entity.createTime},
+            #{entity.lastModifyTime}, #{entity.isBanned})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into takeaway.merchant(name, account, password, phone, address, balance, description, business_status,
+        create_time, last_modify_time, is_banned)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.account}, #{entity.password}, #{entity.phone}, #{entity.address},
+            #{entity.balance}, #{entity.description}, #{entity.businessStatus}, #{entity.createTime},
+            #{entity.lastModifyTime}, #{entity.isBanned})
+        </foreach>
+        on duplicate key update
+        name = values(name) , account = values(account) , password = values(password) , phone = values(phone) , address
+        = values(address) , balance = values(balance) , description = values(description) , business_status =
+        values(business_status) , create_time = values(create_time) , last_modify_time = values(last_modify_time) ,
+        is_banned = values(is_banned)
+    </insert>
+
+</mapper>
+

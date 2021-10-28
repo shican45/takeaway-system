@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.RiderDao">
+
+    <resultMap type=".entity.Rider" id="RiderMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="balance" column="balance" jdbcType="VARCHAR"/>
+        <result property="range" column="range" jdbcType="VARCHAR"/>
+        <result property="isBanned" column="is_banned" jdbcType="BYTE"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastModifyTime" column="last_modify_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into takeaway.rider(name, account, password, phone, balance, range, is_banned, create_time,
+        last_modify_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.account}, #{entity.password}, #{entity.phone}, #{entity.balance}, #{entity.range},
+            #{entity.isBanned}, #{entity.createTime}, #{entity.lastModifyTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into takeaway.rider(name, account, password, phone, balance, range, is_banned, create_time,
+        last_modify_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.account}, #{entity.password}, #{entity.phone}, #{entity.balance}, #{entity.range},
+            #{entity.isBanned}, #{entity.createTime}, #{entity.lastModifyTime})
+        </foreach>
+        on duplicate key update
+        name = values(name) , account = values(account) , password = values(password) , phone = values(phone) , balance
+        = values(balance) , range = values(range) , is_banned = values(is_banned) , create_time = values(create_time) ,
+        last_modify_time = values(last_modify_time)
+    </insert>
+
+</mapper>
+

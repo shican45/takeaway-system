@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.example.bootpermission.entity.UserInfo;
 import com.example.bootpermission.service.LoginService;
 import com.example.permissioncommon.JWTUtils;
+import domain.Merchant;
+import domain.Rider;
+import domain.User;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +22,7 @@ import java.util.UUID;
 
 /**
  * @description:
- * @author: zhangyunfei
+ * @author: hsc
  * @date: 2021/5/11 16:35
  */
 @RestController()
@@ -28,24 +31,42 @@ public class AuthController {
     private Logger logger = LoggerFactory.getLogger("AuthController");
 
     @Autowired
-    private LoginService loginService;
+    LoginService loginService;
 
-    @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody Map<String, String> user) {
-        Map<String, Object> result = new HashMap<String, Object>();
-        Boolean login = user.get("username").equals("test") && user.get("password").equals("1234");
-        if (login) {
-            Map<String, String> info = new HashMap<>(4);
-            info.put("account", user.get("account"));
-            String token = JWTUtils.createJwt(user.get("account"),
-                    user.get("password"));
-            info.put("token", token);
-            result.put("200", "登录成功");
-            result.put("info", info);
-        } else {
-            result.put("401", "用户名或密码错误");
-        }
-        return result;
+    @RequestMapping(value = {"/verifytoken"}, method = RequestMethod.POST)
+    public ResponseEntity<String> verifyToken(@RequestParam String token) {
+        return loginService.verifyToken(token);
+    }
+
+    @PostMapping("/userLogin")
+    public Map<String, Object> userLogin(@RequestParam User user) {
+        return loginService.userLogin(user);
+    }
+
+    @PostMapping("/riderLogin")
+    public Map<String, Object> riderLogin(@RequestParam Rider rider) {
+        return loginService.riderLogin(rider);
+    }
+
+    @PostMapping("/merchantLogin")
+    public Map<String, Object> merchantLogin(@RequestParam Merchant merchant) {
+        return loginService.merchantLogin(merchant);
+    }
+
+
+    @PostMapping("/userRegister")
+    public Map<String, Object> userRegister(@RequestParam User user) {
+        return loginService.userRegister(user);
+    }
+
+    @PostMapping("/riderRegister")
+    public Map<String, Object> riderRegister(@RequestParam Rider rider) {
+        return loginService.riderRegister(rider);
+    }
+
+    @PostMapping("/merchantRegister")
+    public Map<String, Object> merchantRegister(@RequestParam Merchant merchant) {
+        return loginService.merchantRegister(merchant);
     }
     /**
      * 鉴权: 通过token 获得用户的信息。
@@ -57,30 +78,9 @@ public class AuthController {
      * @return
      */
     @RequestMapping(value = {"/authority"}, method = RequestMethod.POST)
-    public String authority(@RequestParam String token, @RequestParam String resource) {
+    public String authority(@RequestParam String role, @RequestParam String token, @RequestParam String resource) {
         logger.info("## permission" + token);
         return "{ userId:123, userName:\"zhang3\" }";
-    }
-
-    /**
-     * 验证 token 的合法性
-     *
-     * @param token
-     * @return
-     */
-    @RequestMapping(value = {"/verifytoken"}, method = RequestMethod.POST)
-    public ResponseEntity<String> verifyToken(@RequestParam String token) {
-        logger.info("## verifyToken 参数 token={}", token);
-        Map<String, Object> claims = JWTUtils.parseJwt(token);
-        String account = (String)claims.get("account");
-        String password = (String)claims.get("password");
-        if (claims.get("account") == null || account.isEmpty() || password.isEmpty() || password == null) {
-            logger.info("## verifyToken 参数 token={}， 失败 ", token);
-            return new ResponseEntity<>("internal error", HttpStatus.UNAUTHORIZED);
-        }
-        UserInfo user = new UserInfo(account, password);
-        logger.info("## verifyToken 参数 token={}， 成功，用户信息={}", token, user);
-        return new ResponseEntity<>(JSON.toJSONString(user), HttpStatus.OK);
     }
 
 

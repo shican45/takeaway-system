@@ -59,5 +59,10 @@ logging:
 ignore:
   authorization:
     urlList:
-      - /permission/login
+      - /permission/userLogin
+      - /permission/riderLogin
+      - /permission/merchantLogin
+      - /permission/userRegister
+      - /permission/riderRegister
+      - /permission/merchantRegister
       - /permission/logout

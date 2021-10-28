@@ -1,19 +1,14 @@
-package com.example.bootgateway.service;
+package infra.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * @description:
- * @author: hsc
- * @date: 2021/10/27 10:47
- */
 @FeignClient(value = "takeaway-permission")
-public interface AuthorizationClient2  {
+public interface AuthorizationClient  {
 
-    @RequestMapping(value = "/verifytoken", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, value = "/verifytoken")
     String verifyToken(@RequestParam String token);
 
 }
