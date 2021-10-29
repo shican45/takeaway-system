@@ -51,7 +51,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Map userLogin(@RequestParam User user){
+    public ResponseEntity<HashMap> userLogin(@RequestParam User user){
 
 
         HashMap<String, Object> response = new HashMap<>(8);
@@ -74,11 +74,11 @@ public class LoginServiceImpl implements LoginService {
         } else {
             response.put("401", "用户名或密码错误");
         }
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public Map riderLogin(@RequestParam Rider rider){
+    public ResponseEntity<HashMap> riderLogin(@RequestParam Rider rider){
 
 
         HashMap<String, Object> response = new HashMap<>(8);
@@ -101,11 +101,11 @@ public class LoginServiceImpl implements LoginService {
         } else {
             response.put("401", "用户名或密码错误");
         }
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public Map merchantLogin(@RequestParam Merchant merchant){
+    public ResponseEntity<HashMap> merchantLogin(@RequestParam Merchant merchant){
 
 
         HashMap<String, Object> response = new HashMap<>(8);
@@ -128,11 +128,11 @@ public class LoginServiceImpl implements LoginService {
         } else {
             response.put("401", "用户名或密码错误");
         }
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public Map userRegister(@RequestParam User user){
+    public ResponseEntity<HashMap> userRegister(@RequestParam User user){
         HashMap<String, Object> response = new HashMap<>(8);
         HashMap<String, Object> info = new HashMap<>(8);
 
@@ -151,11 +151,11 @@ public class LoginServiceImpl implements LoginService {
         } else {
             response.put("401", "账号已存在！");
         }
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public Map riderRegister(@RequestParam Rider rider){
+    public ResponseEntity<HashMap> riderRegister(@RequestParam Rider rider){
         HashMap<String, Object> response = new HashMap<>(8);
         HashMap<String, Object> info = new HashMap<>(8);
 
@@ -174,11 +174,11 @@ public class LoginServiceImpl implements LoginService {
         } else {
             response.put("401", "账号已存在！");
         }
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public Map merchantRegister(@RequestParam Merchant merchant){
+    public ResponseEntity<HashMap> merchantRegister(@RequestParam Merchant merchant){
         HashMap<String, Object> response = new HashMap<>(8);
         HashMap<String, Object> info = new HashMap<>(8);
 
@@ -197,6 +197,6 @@ public class LoginServiceImpl implements LoginService {
         } else {
             response.put("401", "账号已存在！");
         }
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

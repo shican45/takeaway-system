@@ -1,4 +1,4 @@
-package controller;
+package app.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -16,7 +16,9 @@ import java.util.List;
  * @since 2021-10-28 16:16:30
  */
 @RestController
-@RequestMapping("balanceChange")
+@RequestMapping("/takeaway/user/balanceChange")
 public class BalanceChangeController{
+
+
 }
 

@@ -16,9 +16,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * @description: 用户鉴权：某个人能否访问某个 URI资源
- * @author: zhangyunfei
- * @date: 2021/5/14 18:37
+ * 用户鉴权：某个人能否访问某个 URI资源
  */
 @Slf4j
 public class AuthorityFilter implements GlobalFilter, Ordered {

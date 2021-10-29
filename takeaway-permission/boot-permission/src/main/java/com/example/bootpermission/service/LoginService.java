@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -26,7 +27,7 @@ public interface LoginService {
      * @param user
      * @return
      */
-    Map userLogin(@RequestParam User user);
+    ResponseEntity<HashMap> userLogin(@RequestParam User user);
 
     /**
      * 骑手登陆
@@ -34,7 +35,7 @@ public interface LoginService {
      * @param rider
      * @return
      */
-    Map riderLogin(@RequestParam Rider rider);
+    ResponseEntity<HashMap> riderLogin(@RequestParam Rider rider);
 
     /**
      * 商户登陆
@@ -42,7 +43,7 @@ public interface LoginService {
      * @param merchant
      * @return
      */
-    Map merchantLogin(@RequestParam Merchant merchant);
+    ResponseEntity<HashMap> merchantLogin(@RequestParam Merchant merchant);
 
     /**
      * 用户注册
@@ -50,7 +51,7 @@ public interface LoginService {
      * @param user
      * @return
      */
-    Map userRegister(@RequestParam User user);
+    ResponseEntity<HashMap> userRegister(@RequestParam User user);
 
     /**
      * 骑手注册
@@ -58,7 +59,7 @@ public interface LoginService {
      * @param rider
      * @return
      */
-    Map riderRegister(@RequestParam Rider rider);
+    ResponseEntity<HashMap> riderRegister(@RequestParam Rider rider);
 
     /**
      * 商户注册
@@ -66,5 +67,5 @@ public interface LoginService {
      * @param merchant
      * @return
      */
-    Map merchantRegister(@RequestParam Merchant merchant);
+    ResponseEntity<HashMap> merchantRegister(@RequestParam Merchant merchant);
 }

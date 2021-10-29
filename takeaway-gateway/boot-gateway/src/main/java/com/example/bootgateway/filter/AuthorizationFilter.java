@@ -1,8 +1,8 @@
 package com.example.bootgateway.filter;
 
 import com.example.bootgateway.config.IgnoreAuthorizationConfig;
-import com.example.bootgateway.service.AuthorizationClient1;
-import com.example.bootgateway.service.AuthorizationClient2;
+import com.example.bootgateway.feign.AuthorizationClient1;
+import com.example.bootgateway.feign.AuthorizationClient2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -15,11 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-/**
- * @description:
- * @author: zhangyunfei
- * @date: 2021/5/16 20:33
- */
 @Slf4j
 @Component
 public class AuthorizationFilter extends AbstractGatewayFilterFactory<AuthorizationFilter.Config> {
